@@ -12,30 +12,37 @@ There is no shared templating, no server-side includes, and no build step joinin
 ## Main Site Page Structure
 
 `index.html` sections, in DOM order (see the `<section id="...">` elements):
-- `#header` — name/title, typed.js animated role text, nav menu, social links.
-- `#about` — bio, personal details (populated from `assets/js/data.js`).
+- `#header` — name/title, professional title (`.job-description`, bound from `data.js`), typed.js animated role text, nav menu, social links.
+- `#about` — contains two nested blocks: `.about-me` (bio/personal details, populated from `assets/js/data.js`) and `.interests` (a static 4-up icon grid). Both are inside the single `#about` section, not separate top-level sections.
 - `#education` — education history.
-- `#experience` — work experience, skill bars (animated via jQuery Waypoints + a `.progress-bar` width set on scroll-into-view).
+- `#experience` — work experience.
+- `#contact` — email/phone/location cards plus a social-links/"Say hello" card. A 5th switchable tab (see Navigation Behavior below).
+- `<footer>` — copyright line. Sits *outside* the tab system: it is always visible regardless of which tab is active (see below).
 
-The template ships vendor plugins for a portfolio grid (Isotope + Venobox) and a testimonials carousel (Owl Carousel) — see [`COMPONENTS.md`](./COMPONENTS.md) — but the current page has no corresponding `#portfolio`/`#testimonials` sections. Those scripts still load on every page view with nothing to act on; see [`FRAMEWORK_NOTES.md`](./FRAMEWORK_NOTES.md).
+The vendor plugins this template originally shipped for a portfolio grid (Isotope + Venobox) and a testimonials carousel (Owl Carousel) have been removed entirely (not just unused) as part of the 2026-07-14 visual refactor — there is no dead vendor-plugin weight to flag anymore. See [`FRAMEWORK_NOTES.md`](./FRAMEWORK_NOTES.md) for the current vendor inventory.
 
 ## Navigation Behavior
 
-`assets/js/main.js` implements hash-based section switching:
-- Clicking a `.nav-menu`/`.mobile-nav` link intercepts the click, adds `.header-top` to `#header`, and swaps the `.section-show` class from the current section to the target section (with a short `setTimeout` for the header's collapse transition).
-- On page load, if the URL already has a hash, the matching section is activated immediately (deep-linking support).
-- A mobile nav is generated at runtime by cloning `.nav-menu` and appending a toggle button + overlay — there's no separate mobile markup to maintain by hand.
+The nav is a **click-driven, single-section-visible ("tab") mechanism** — not scroll-based, and not the hash-driven `.section-show` toggle from before the refactor. (This was actually tried as a true anchor-scroll + IntersectionObserver scroll-spy nav during the refactor, then reverted back to click-driven tabs per user preference after an in-browser review — so if you're tempted to "restore" scroll-anchoring, that was a deliberate reversal, not an oversight.)
+
+`assets/js/main.js` implements it:
+- Clicking a `.nav-menu`/`.mobile-nav` link intercepts the click (`activateTab(hash)`), toggles `.is-active` on the matching `<section id="...">` (CSS `display: none` otherwise — see `assets/css/style.css`'s "Panel-swap tabs" block) and toggles `.active` on the corresponding nav `<li>`.
+- Activating any tab other than `#header` also adds `.is-condensed` to `#header`, which CSS shrinks into a sticky top bar (title only, no role/typed text/social links) so the active tab's content has room; switching back to the `#header` tab removes it.
+- A CSS `tab-fade-in` keyframe animation (opacity + translateY) plays when a section gains `.is-active`, disabled under `prefers-reduced-motion`.
+- On page load, if the URL already has a hash matching a section, that tab is activated immediately (deep-linking support).
+- The `<footer>` is not part of this tab system — it has no `id` and is never toggled, so it stays visible below whichever tab is showing.
+- A mobile nav is generated at runtime by cloning `.nav-menu` and appending a toggle button + overlay (Bootstrap Icons `bi-list`/`bi-x-lg` swapped on toggle, with `aria-expanded`/`aria-controls` kept in sync) — there's no separate mobile markup to maintain by hand.
 
 ## Script/Style Loading Order (`index.html`)
 
-1. Google Fonts (external, render-blocking by default — no `preload`/`font-display` override currently set).
-2. Vendor CSS: Bootstrap → Icofont → Remixicon → Owl Carousel → Boxicons → Venobox.
-3. `assets/css/style.css` (site-specific overrides, loaded last so it can override vendor defaults).
+1. Google Fonts (external, render-blocking by default — no `preload`/`font-display` override currently set). Single family: Inter.
+2. Vendor CSS: Bootstrap → Bootstrap Icons.
+3. `assets/css/style.css` (site-specific overrides + design tokens, loaded last so it can override vendor defaults).
 4. Body content.
-5. Vendor JS (bottom of body, in dependency order): jQuery → Bootstrap bundle → jQuery Easing → php-email-form → Waypoints → CounterUp → Owl Carousel → Isotope → Venobox → Typed.js.
-6. `assets/js/main.js` (behavior, plugin initialization) → `assets/js/data.js` (personal data injection).
+5. Vendor JS (bottom of body, in dependency order): jQuery → Bootstrap bundle → Typed.js (with an inline `<script>` configuring the typed strings directly in `index.html`).
+6. `assets/js/main.js` (nav/tab behavior, mobile nav) → `assets/js/data.js` (personal data injection) → `assets/js/reveal.js` (scroll-reveal for `[data-reveal]` elements).
 
-`main.js` must load before `data.js` is unnecessary for correctness (they don't depend on each other directly), but both must load after jQuery and the vendor plugins they call into.
+`main.js`, `data.js`, and `reveal.js` don't depend on each other directly, but all three must load after jQuery/Bootstrap since `main.js` uses jQuery.
 
 ## CV Sub-Page
 
@@ -46,6 +53,7 @@ The template ships vendor plugins for a portfolio grid (Isotope + Venobox) and a
 - **No build tooling by design (so far):** the project trades away minification/bundling/linting for zero-setup editing — any change to this should be a deliberate, discussed decision, not something introduced incidentally by a single feature.
 - **Two independently-vendored Bootstrap copies:** the main site and the CV page were never unified onto one shared vendor directory. Treat them as two separate surfaces when upgrading either.
 - **No client-side routing framework:** the "single-page" feel on the main site is hand-rolled with class toggling, not a router — keep new interactive behavior consistent with that pattern rather than introducing a routing library for a handful of sections.
+- **Design tokens via plain CSS custom properties, no Sass build:** the "Liquid Glass" visual system (glass blur/translucency, color/spacing tokens, Bootstrap 5 `--bs-*` overrides) lives in a `:root` block in `assets/css/style.css` — see [`UI_GUIDELINES.md`](./UI_GUIDELINES.md) for the token list. This works without a build step because Bootstrap 5's compiled CSS already exposes its variables; don't introduce Sass/PostCSS for this alone.
 
 ## Related Docs
 

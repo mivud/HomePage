@@ -1,48 +1,43 @@
 # UI_GUIDELINES.md — Design System & Conventions
 
+The main site uses a light "Liquid Glass" design system (introduced 2026-07-14, replacing a prior dark navy/green theme). The CV sub-page (`cv/`) is out of scope for this system — it keeps its own separate stylesheet/theme untouched.
+
 ## Typography
 
-Three Google Fonts families loaded on both the main site and CV page:
-- **Open Sans** — body copy.
-- **Raleway** — headings/titles in several sections.
-- **Poppins** — used across nav, section titles, and various UI labels.
+A single Google Fonts family, **Inter**, loaded on the main site (variable weights 300–700, italic 400) — it replaced the previous three-family Open Sans/Raleway/Poppins setup. `--font-body` (see Design Tokens below) is the one place font-family is set; don't introduce a second family for a new element.
 
-Font choice is set per-selector in `assets/css/style.css` (there's no CSS custom-property/token layer — colors and fonts are hard-coded per rule). When styling something new, match the `font-family` already used by the nearest similar element rather than introducing a fourth family.
+## Design Tokens
 
-## Color
+`assets/css/style.css`'s `:root` block is the single source of truth for the visual system — reuse a token rather than a new literal value:
+- `--glass-bg`, `--glass-border`, `--glass-blur`, `--glass-saturate`, `--glass-filter`, `--glass-highlight`, `--glass-radius`, `--glass-shadow` — the frosted-glass look consumed by `.glass-card` and other glass surfaces (see [`COMPONENTS.md`](./COMPONENTS.md)).
+- `--page-bg-top`/`--page-bg-bottom` — the body's top-to-bottom gradient background.
+- `--text-primary`/`--text-secondary` — the two text colors used site-wide.
+- `--pill-bg`/`--pill-bg-hover`/`--pill-fg` — `.btn-glass` pill button colors.
+- Bootstrap 5 `--bs-*` overrides (body bg/color/font, link colors, border-radius) are set directly in the same block — this works without a Sass build because Bootstrap 5's compiled CSS already exposes these as CSS variables.
 
-No `:root` CSS variable palette exists in `assets/css/style.css` — colors are literal hex values per selector. Before introducing a new color, search `assets/css/style.css` for a hex value already used for a similar purpose (accent, background, text) and reuse it rather than picking a new one, to avoid the palette drifting further.
+Before adding a new color or blur/shadow value, check whether an existing token already covers the need; add a new token to `:root` rather than a one-off literal if a genuinely new value is needed.
 
 ## Responsive Breakpoints
 
-The stylesheet's actual `@media` breakpoints (max-width unless noted):
-- `min-width: 1024px` — desktop-specific rules.
-- `992px` — tablet/small-desktop.
-- `768px` — tablet/mobile.
-- `767px` — mobile.
-
-Bootstrap 4's own grid breakpoints (`sm`/`md`/`lg`/`xl` utility/grid classes) are also available via the vendored Bootstrap CSS and are used directly in markup (e.g. `d-none d-lg-block`, `col-lg-4`) — prefer a Bootstrap grid/utility class over a new custom `@media` rule when the existing grid breakpoints already cover the need.
+Bootstrap 5's grid breakpoints (`sm`/`md`/`lg`/`xl` utility/grid classes, e.g. `d-none d-lg-block`, `row-cols-md-3`) are used directly in markup and are the primary responsive mechanism. `assets/css/style.css` adds a small number of its own `max-width` breakpoints on top (e.g. `767.98px`, `575.98px`) for header/section-specific sizing — prefer a Bootstrap grid/utility class over a new custom `@media` rule when the existing grid breakpoints already cover the need.
 
 ## Accessibility
 
-No formal accessibility audit has been run on this site. When touching UI:
-- Keep interactive elements as native `<a>`/`<button>` rather than div/span with a click handler.
-- Icon-only controls (e.g. the mobile nav toggle, social links using Boxicons/Icofont glyph classes) need an accessible name (`aria-label` or visually-hidden text) — check the current markup before assuming one exists.
-- Images (`assets/img/`) should carry meaningful `alt` text; decorative images should use `alt=""`.
-- The animated section-reveal/typed-text behavior (see [`ARCHITECTURE.md`](./ARCHITECTURE.md)) has no `prefers-reduced-motion` handling currently — flag this as a known gap rather than silently "fixing" it outside an explicitly requested a11y pass.
+No formal accessibility audit has been run on this site, but the 2026-07-14 refactor fixed several previously-known gaps:
+- The avatar image now has real `alt` text; icon-only links (social links, mobile nav toggle) have `aria-label`s; the mobile nav toggle has `aria-expanded`/`aria-controls` kept in sync with its state.
+- Both the scroll-reveal effect (`assets/js/reveal.js`) and the tab-switch fade animation (`assets/css/style.css`'s `tab-fade-in` keyframe) now respect `prefers-reduced-motion` — this is no longer an open gap.
+- Still open: no dedicated accessibility/contrast audit has been run against the new light theme (e.g. `--text-secondary` contrast against `--glass-bg` at low opacity) — flag this as a known gap rather than silently "fixing" it outside an explicitly requested a11y pass. See [`ROADMAP.md`](./ROADMAP.md).
+- Keep interactive elements as native `<a>`/`<button>` rather than div/span with a click handler — unchanged guidance.
 
 ## Icons
 
-Three icon sets are vendored and in active use — don't add a fourth for something one of these already covers:
-- **Boxicons** (`bx bx-*`, `bx bxl-*`) — social links, some UI icons.
-- **Icofont** (`icofont-*`) — mobile nav toggle and other UI glyphs.
-- **Remixicon** — vendored and loaded; check current markup for actual usage before assuming it's the default choice for a new icon.
+**Bootstrap Icons** (`bi bi-*`) is the single icon set — it replaced three previously-vendored icon fonts (Boxicons, Icofont, Remixicon), which have been removed entirely. Don't add a second icon set; if `bi-*` doesn't have a needed glyph, flag it rather than vendoring another font.
 
 ## SEO Basics
 
-- Every page needs a real `<title>` and a non-empty meta description (`index.html`'s `<meta name="descriptison">` is currently empty and has a typo in the attribute name — see [`AI_CONTEXT.md`](./AI_CONTEXT.md) known limitations).
+- Every page needs a real `<title>` and a non-empty meta description — `index.html`'s meta description is now filled in with real content and the attribute-name typo (`descriptison`) is fixed.
 - Keep heading hierarchy sequential (`h1` → `h2` → `h3`) within each section rather than skipping levels for visual sizing — use CSS for size, not heading level.
-- Prefer semantic sectioning elements (`<section>`, `<nav>`, `<header>`) — already the pattern in `index.html` — over generic `<div>`s for structural regions.
+- Prefer semantic sectioning elements (`<section>`, `<nav>`, `<header>`, `<footer>`) — already the pattern in `index.html` — over generic `<div>`s for structural regions.
 
 ## Styling Conventions
 

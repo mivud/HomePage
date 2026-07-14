@@ -9,13 +9,16 @@
 # Design tokens
 --------------------------------------------------------------*/
 :root {
-  --glass-bg: rgba(255, 255, 255, 0.65);
-  --glass-border: rgba(255, 255, 255, 0.35);
-  --glass-blur: 16px;
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-blur: 24px;
+  --glass-saturate: 180%;
+  --glass-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.5);
   --page-bg-top: #ffffff;
   --page-bg-bottom: #f7f8fa;
   --text-primary: #111111;
-  --text-secondary: #666666;
+  --text-secondary: #595959;
   --pill-bg: rgba(0, 0, 0, 0.8);
   --pill-bg-hover: rgba(0, 0, 0, 0.9);
   --pill-fg: #ffffff;
@@ -30,7 +33,7 @@
   --bs-link-color: var(--text-primary);
   --bs-link-color-rgb: 17, 17, 17;
   --bs-link-hover-color: var(--text-secondary);
-  --bs-link-hover-color-rgb: 102, 102, 102;
+  --bs-link-hover-color-rgb: 89, 89, 89;
   --bs-border-radius: var(--glass-radius);
   --bs-border-radius-lg: var(--glass-radius);
 }
@@ -39,9 +42,9 @@
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--glass-radius);
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
 }
 
 @supports not (backdrop-filter: blur(1px)) {
@@ -211,8 +214,8 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
   box-shadow: var(--glass-shadow);
 }
 
@@ -309,8 +312,8 @@ h1, h2, h3, h4, h5, h6 {
   border: 0;
   border-radius: 50%;
   background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
   box-shadow: var(--glass-shadow);
   display: flex;
   align-items: center;
@@ -333,8 +336,8 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1039;
   overflow-y: auto;
   background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
   border: 1px solid var(--glass-border);
   border-radius: var(--glass-radius);
   box-shadow: var(--glass-shadow);

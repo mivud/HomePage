@@ -8,6 +8,7 @@ There is no `package.json`, bundler, linter, formatter, or test runner in this p
 
 - `assets/js/main.js` wraps its code in an IIFE taking `jQuery` as `$` (`!(function($) { "use strict"; ... })(jQuery);`) — follow this pattern for new script files that use jQuery, rather than relying on the global `$`.
 - `assets/js/data.js` is plain vanilla JS (no jQuery) using `getElementsByClassName` + direct DOM property assignment (`.innerHTML`, `.href`) — this file's job is narrowly "inject personal data by class name" (see [`COMPONENTS.md`](./COMPONENTS.md)); keep new data-driven fields following that same pattern rather than adding a templating layer.
+- `assets/js/reveal.js` follows the same "small, single-purpose, no jQuery" convention as `data.js` (plain `IntersectionObserver`, no external library) — prefer this pattern for a new self-contained behavior script rather than adding it to `main.js` or pulling in a library.
 - No module system (no ES modules, no CommonJS) — scripts communicate via globals (`jQuery`, `data`) and DOM state, loaded via plain `<script>` tags in a specific order (see [`ARCHITECTURE.md`](./ARCHITECTURE.md)). If a new script depends on jQuery or another vendor library, place its `<script>` tag after that dependency.
 - Prefer `const`/`let` and strict equality (`===`) in any new code, even though the existing vendor/template code predates that convention — don't rewrite vendor files to match, but hold new first-party code to it.
 
@@ -20,6 +21,7 @@ There is no `package.json`, bundler, linter, formatter, or test runner in this p
 ## CSS Conventions
 
 - One stylesheet per page/surface (`assets/css/style.css` for the main site, `cv/css/site.css` for the CV page) — see [`UI_GUIDELINES.md`](./UI_GUIDELINES.md) for the typography/color/breakpoint conventions those files follow.
+- The main site's colors, blur/shadow values, and font stack are CSS custom properties in `assets/css/style.css`'s `:root` block — add a new value there and reference it via `var(--token-name)` rather than hard-coding a new literal, matching the existing "design tokens" pattern (see [`UI_GUIDELINES.md`](./UI_GUIDELINES.md#design-tokens)). The CV page has no such token layer — it's a separate surface with its own conventions.
 - Vendor CSS (`assets/vendor/*`, `cv/lib/*`) is never edited directly — any override belongs in the site's own stylesheet, which loads after vendor CSS in both `index.html` and `cv/index.html`.
 
 ## Adding a Vendor Library

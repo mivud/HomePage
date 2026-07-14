@@ -5,31 +5,29 @@ There's no component framework here — "components" means recurring markup patt
 ## Main Site (`index.html` / `assets/`)
 
 ### Header / Nav (`#header`)
-- Fixed-position header with animated role text via **Typed.js** (`<span class="typing">`, configured in `assets/js/main.js` if extended — currently the typed strings live inline; check `main.js` before adding a new typed-role feature).
+- Header fills the viewport height and condenses into a sticky top bar on tab switch (`.is-condensed`, see [`ARCHITECTURE.md`](./ARCHITECTURE.md#navigation-behavior)). Animated role text via **Typed.js** (`<span class="typing">`) — the typed strings are configured in an inline `<script>` in `index.html` itself, not in `main.js`; check `index.html` before adding a new typed-role feature.
 - `.nav-menu` (desktop) is cloned at runtime into `.mobile-nav` (mobile) by `main.js` — never hand-write separate mobile nav markup; extend `.nav-menu` and the mobile version follows automatically.
-- Social links use **Boxicons** (`<i class="bx bx-...">`).
+- Social links and all other icon usage across the site use **Bootstrap Icons** (`<i class="bi bi-...">`) — the sole icon set (see [`FRAMEWORK_NOTES.md`](./FRAMEWORK_NOTES.md)).
 
 ### Data-driven text (`assets/js/data.js`)
-- A single `data` object (name, job title, contact info, "years of experience" figures) is injected into the DOM by **class name**, not by ID or a templating engine: `setValueByClassName('fullname', data.fullName)` finds the first element with class `fullname` and sets its `innerHTML`.
-- To surface a new personal-data field somewhere on the page: add it to the `data` object in `data.js`, add a `setValueByClassName`/`setHrefByClassName` call, and give the target element the matching class name. This is the project's only "data binding" mechanism — don't introduce a second one for a new field.
+- A single `data` object (name, job title, contact info, "years of experience" figures) is injected into the DOM by **class name**, not by ID or a templating engine: `setValueByClassName('fullname', data.fullName)` finds *all* elements with that class name (not just the first) and sets each one's `innerHTML`; `setHrefByClassName` does the same for `href`. This lets the same field (e.g. `email`, `mail-to`) be bound in more than one place — e.g. both the About block and the new Contact section.
+- To surface a new personal-data field somewhere on the page: add it to the `data` object in `data.js`, add a `setValueByClassName`/`setHrefByClassName` call, and give the target element(s) the matching class name. This is the project's only "data binding" mechanism — don't introduce a second one for a new field.
 
-### Section reveal (`.section-show` / nav)
-- See [`ARCHITECTURE.md`](./ARCHITECTURE.md#navigation-behavior). A new top-level page section should be a `<section id="...">` added to both the DOM and the `.nav-menu` list — `main.js`'s existing click handler picks it up automatically, no JS changes needed for a plain new section.
+### Tab navigation (`.is-active` / nav)
+- See [`ARCHITECTURE.md`](./ARCHITECTURE.md#navigation-behavior). A new top-level page section should be a `<section id="...">` added to both the DOM and the `.nav-menu` list — `main.js`'s existing click handler picks it up automatically, no JS changes needed for a plain new section. A `<footer>`-style always-visible element should stay outside the `<section id="...">` set (no `id`) so it isn't caught by the tab toggle.
 
-### Skill/experience bars (`#experience`)
-- Bootstrap `.progress`/`.progress-bar` markup with `aria-valuenow` set on the bar. **jQuery Waypoints** triggers a callback when `.skills-content` scrolls into view, which then sets each bar's CSS `width` from its `aria-valuenow` (the animated "fill in" effect). Reuse this pattern for any new animated-on-scroll numeric bar rather than adding a new scroll-observer library.
+### Scroll reveal (`assets/js/reveal.js`)
+- Add `data-reveal="up"` (or `"left"`/`"right"`) to an element to have it fade/slide into view once scrolled into the viewport — a small vanilla `IntersectionObserver` script, no jQuery/library dependency. One-shot per element; respects `prefers-reduced-motion` by revealing everything immediately instead of animating. Reuse this attribute-driven pattern for new on-scroll reveals rather than adding an animation library (the previous `data-aos` attributes were dead markup with no library behind them and have been replaced by this mechanism).
 
-### Animated counters (template-wide utility, not currently rendered on `index.html`)
-- **jQuery CounterUp** (`counterup.min.js`) is initialized in `main.js` against `[data-toggle="counter-up"]`. If a stats/counter block is added back to the page, use this existing initialization rather than hand-rolling a counting animation.
+### Glass design system (`assets/css/style.css`)
+- `.glass-card` — the frosted-glass panel used for the About/Education/Experience/Contact cards (backdrop blur+saturate, translucent bg/border, inset highlight, solid-color `@supports` fallback for browsers without `backdrop-filter`).
+- `.btn-glass` — black-translucent pill button, built on Bootstrap 5's per-component `--bs-btn-*` variable API rather than a hand-rolled class.
+- `.badge-glass`, `.icon-chip` — small glass-styled badge/icon-circle helpers used in the Education/Experience/Contact cards.
+- See [`UI_GUIDELINES.md`](./UI_GUIDELINES.md) for the underlying design-token layer these classes consume.
 
-### Portfolio grid (vendor plugins loaded, no current `#portfolio` section)
-- **Isotope** (`.portfolio-container` / `.portfolio-item`, filterable via `#portfolio-flters`) + **Venobox** (`.venobox` class for lightbox behavior) are wired up in `main.js` and ready to use if a portfolio/gallery section is (re)added — don't add a competing grid/lightbox library.
+## Now-Removed Components
 
-### Testimonials carousel (vendor plugin loaded, no current `#testimonials` section)
-- **Owl Carousel** is initialized against `.testimonials-carousel` with a responsive breakpoint config (1 item <768px, 2 at 768px, 3 at 900px+) in `main.js`. Reuse this initialization if testimonials return.
-
-### Contact/email form (vendor plugin present)
-- `assets/vendor/php-email-form/validate.js` handles client-side validation/submission wiring for a form posting to a PHP endpoint — this is the template's default contact-form mechanism if one is added; it does not currently point at a live endpoint on this site.
+The portfolio grid (Isotope + Venobox), testimonials carousel (Owl Carousel), animated counters (jQuery CounterUp), skill-bar scroll animation (jQuery Waypoints), and the PHP contact-form scaffold (`php-email-form`) were all vendor plugins loaded with no matching page content, and were removed entirely (not just left unused) in the 2026-07-14 visual refactor — the vendored files no longer exist. If any of these features are wanted again, they'll need to be re-vendored from scratch; don't assume leftover initialization code still exists to hook into.
 
 ## CV Sub-Page (`cv/`)
 
@@ -37,6 +35,6 @@ The CV page (`cv/index.html`) is visually and structurally independent from the 
 
 ## Adding a New Section/Component
 
-1. Check this file and `assets/js/main.js` for an existing pattern (nav-driven section, data-class binding, scroll-triggered animation, carousel/grid/lightbox) before writing new JS.
+1. Check this file and `assets/js/main.js` for an existing pattern (nav-driven tab section, data-class binding, `data-reveal` scroll animation, glass card/badge/chip styling) before writing new JS or CSS.
 2. Reuse an already-vendored plugin (see [`FRAMEWORK_NOTES.md`](./FRAMEWORK_NOTES.md) for the full inventory) instead of adding a new one for the same job.
 3. Keep styling in `assets/css/style.css` (or `cv/css/site.css` for the CV page) — don't introduce inline `<style>` blocks or a new stylesheet file for a single section.

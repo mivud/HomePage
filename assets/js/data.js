@@ -35,6 +35,7 @@ setValueByClassName('email', data.email);
 setValueByClassName('phone', data.phone);
 setValueByClassName('address', data.address);
 setValueByClassName('birth-year', data.birthYear);
+setValueByClassName('homePage', data.homePage);
 
 setValueByClassName('dotnet-years', currentYear - data.dotnetFromYear + 1);
 setValueByClassName('retail-years', currentYear - data.retailFromYear + 1);
@@ -42,8 +43,8 @@ setValueByClassName('retail-ops-years', currentYear - data.retailOprFromYear + 1
 setValueByClassName('helpdesk-from', data.helpdeskFromYear);
 setValueByClassName('copyright-year', currentYear);
 
-setHrefByClassName('linkedin-link', 'https://www.linkedin.com/in/hnimvu');
+setHrefByClassName('linkedin-link', 'https://www.linkedin.com/in/hnimuv');
 setHrefByClassName('instagram-link', 'https://www.instagram.com/mivu.ins');
-setHrefByClassName('github-link', 'https://github.com/5-fire');
+setHrefByClassName('github-link', 'https://github.com/mivud');
 setHrefByClassName('mail-to', 'mailto:' + data.email);
 setHrefByClassName('tel-to', 'tel:' + data.phone);

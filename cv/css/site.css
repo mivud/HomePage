@@ -1,176 +1,244 @@
 /* -------------------------------------
+# Design tokens
+--------------------------------------*/
+:root {
+  --cv-bg: #ffffff;
+  --cv-bg-subtle: #f7f8fa;
+  --cv-text-primary: #111111;
+  --cv-text-secondary: #595959;
+  --cv-border: #e0e0e0;
+  --cv-accent: #111111;
+  --cv-font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* -------------------------------------
 # General
 --------------------------------------*/
+html {
+  font-size: 15px;
+}
+
 body {
-    font-family: "Nunito", "Lato", "Open Sans", sans-serif;
-    font-size: 18px;
-  }
-  
+  font-family: var(--cv-font);
+  color: var(--cv-text-primary);
+  background: var(--cv-bg);
+}
+
 a {
-    color: #2487ce;
-    text-decoration: none;
+  color: var(--cv-text-primary);
+  text-decoration: none;
 }
-  
+
 a:hover {
-    color: #469fdf;
-    text-decoration: none;
+  color: var(--cv-text-secondary);
+  text-decoration: none;
 }
-  
+
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Raleway", sans-serif;
+  font-family: var(--cv-font);
+  color: var(--cv-text-primary);
+}
+
+/* -------------------------------------
+# Page Container
+--------------------------------------*/
+.cv-page {
+  max-width: 210mm;
+  margin: 0 auto;
+  background: var(--cv-bg);
 }
 
 /* -------------------------------------
 # Header
 --------------------------------------*/
-#header {
-    padding-bottom: 5px;
-    border-bottom: #2487ce solid;
+.cv-header {
+  border-bottom: 2px solid var(--cv-accent);
+  background: var(--cv-bg-subtle);
 }
 
-#header p{
-    margin: 0;
-    padding: 0 30px 15px 30px;
+.cv-name {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
 }
 
-#header .name {
-    font-size: 50px;
-    font-weight: 600;
-    color: #2487ce;
+.cv-tagline p {
+  font-size: 0.85rem;
+  color: var(--cv-text-secondary);
 }
 
-#header .my-image {
-    text-align: center;
-    vertical-align: middle;
+.cv-avatar {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border: 3px solid var(--cv-bg);
+  box-shadow: 0 0 0 1px var(--cv-border);
 }
 
-#header .my-image img{
-    margin-top: 25px;
-    width: 200px;
+.cv-contact {
+  font-size: 0.85rem;
 }
 
-#header .contact {
-    text-align: right;
+.cv-contact li {
+  margin-bottom: 0.4rem;
 }
 
-#header .contact p{
-    margin: 10px 0 10px 0;
+.cv-contact li:last-child {
+  margin-bottom: 0;
 }
 
-#header .contact .icon {
-    font-size: 22px;
-    margin-left: 10px;
-    color: #2487ce;
+.cv-contact i {
+  color: var(--cv-text-secondary);
+  font-size: 1rem;
+  width: 1.1rem;
+  text-align: center;
 }
 
 /* -------------------------------------
-# Content
+# Section (shared)
 --------------------------------------*/
-#content .section-header {
-    color: #124265;
-    font-size: 35px;
-    font-weight: 700;
-    margin: 5px 0 5px 0;
+.cv-section {
+  margin-bottom: 1.25rem;
 }
 
-#content p {
-    margin: 0;
-    padding: 0;
+.cv-section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 2px solid var(--cv-accent);
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.65rem;
 }
 
-#content ul {
-    list-style-type: circle;
+.cv-subheading {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--cv-text-secondary);
+  margin-bottom: 0.3rem;
+}
+
+.cv-list {
+  padding-left: 1.1rem;
+  margin-bottom: 0;
+}
+
+.cv-list li {
+  font-size: 0.82rem;
+  margin-bottom: 0.3rem;
+}
+
+.cv-list li:last-child {
+  margin-bottom: 0;
 }
 
 /* -------------------------------------
 # About
 --------------------------------------*/
-#about {
-    margin-left: 20px;
-    line-height: 1.5;
+.cv-badge {
+  background: var(--cv-bg-subtle);
+  color: var(--cv-text-primary);
+  border: 1px solid var(--cv-border);
+  font-weight: 500;
+  font-size: 0.75rem;
+  padding: 0.45em 0.75em;
 }
 
 /* -------------------------------------
 # Skills
 --------------------------------------*/
-#skills .skill-header {
-    text-align: center;
-    font-size: 30px;
-    font-weight: 400;
-    color: #124265;
-}
-
-#skills .skill-content {
-    margin: 0px 10px 0px 10px;
-}
-
-/* -------------------------------------
-# Works
---------------------------------------*/
-#works .work-content {
-    margin-bottom: 15px;
-}
-
-#works .work-content p{
-    padding: 0;
-    margin: 0;
-}
-
-#works .work-content .work-time {
-    font-size: 18px;
-    font-weight: 400;
-    font-family: "Raleway", sans-serif;
-    color: #1e6ca6;
-    margin-top: 5px;
-}
-
-#works .work-content .work-position {
-    font-size: 24px;
-    font-weight: 700;
-    color: #124265;
-}
-
-#works .work-content .work-company {
-    font-size: 20px;
-    font-weight: 700;
-}
-
-#works ul {
-    margin-bottom: 5px;
+.cv-skill-group:last-child {
+  margin-bottom: 0;
 }
 
 /* -------------------------------------
 # Education
 --------------------------------------*/
-#education .education-content {
-    margin: 20px 0 0 30px;
+.cv-edu-entry {
+  margin-bottom: 0.75rem;
 }
 
-#education .education-content p{
-    padding: 0;
-    margin: 0;
+.cv-edu-place {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin: 0 0 0.15rem;
 }
 
-#education .education-content h5{
-    padding: 0;
-    margin: 5px 0 5px 0;
-}
-
-#education .education-content .education-time {
-    font-size: 15px;
-    font-family: "Raleway", sans-serif;
-    color: #1e6ca6;
-}
-
-#education .education-content .education-place {
-    font-weight: bold;
-    color: #1e6ca6;
+.cv-edu-desc {
+  font-size: 0.8rem;
+  color: var(--cv-text-secondary);
+  margin: 0;
 }
 
 /* -------------------------------------
 # Language
 --------------------------------------*/
-#language {
-    margin: 0 0 0 30px;
+/* Uses shared .cv-section rules only */
+
+/* -------------------------------------
+# Recent Works
+--------------------------------------*/
+.cv-work-entry {
+  margin-bottom: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--cv-border);
 }
-  
+
+.cv-work-entry:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.cv-work-time {
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--cv-text-secondary);
+}
+
+.cv-work-position {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.cv-work-company {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cv-text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+/* -------------------------------------
+# Print
+--------------------------------------*/
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html, body {
+    background: #ffffff;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .cv-page {
+    max-width: none;
+    margin: 0;
+  }
+
+  .cv-work-entry,
+  .cv-edu-entry {
+    break-inside: avoid;
+  }
+
+  .cv-header {
+    break-after: avoid;
+  }
+}

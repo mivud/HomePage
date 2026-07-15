@@ -8,222 +8,264 @@
 <title>Minh Vu 's CV</title>
 
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
 <!-- Vendor CSS Files -->
-<link href="lib/bootstrap-4.6.0-dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Font Awesome-->
-<link href="lib/fontawesome-free-5.15.2-web/css/all.min.css" rel="stylesheet">
+<link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
 
 <!-- Custom CSS File -->
 <link href="css/site.css" rel="stylesheet">
 
-<style>
-    .btn-outline-primary {
-        color: #2487ce;
-        border-color: #2487ce;
-    }
-</style>
-
 </head>
 
 <body>
-    <!-- Header -->
-    <div id="header" class="row">
-        <div class="col col-5 about-me">
-            <p class="name fullname">FullName</p>
-            <div class="job-title">
-                <p><span class="donet-years"></span> years with .NET developer.</p>
-                <p><span class="retail-years"></span> years of experience in retail environment (include <span class="retail-ops-years"></span> years at operating system).</p>
-                <p>IT Helpdesk since <span class="helpdesk-years"></span>.</p>
-            </div>
+  <div class="cv-page">
+
+    <!-- ======= Header ======= -->
+    <header class="cv-header p-4">
+      <div class="row align-items-center g-3">
+        <div class="col-5">
+          <p class="cv-name fullname mb-2">FullName</p>
+          <div class="cv-tagline">
+            <p class="mb-1"><span class="dotnet-years"></span> years with .NET developer.</p>
+            <p class="mb-1"><span class="retail-years"></span> years of experience in retail environment (include <span class="retail-ops-years"></span> years at operating system).</p>
+            <p class="mb-0">IT Helpdesk since <span class="helpdesk-from"></span>.</p>
+          </div>
         </div>
-        <div class="col col-2 my-image">
-            <img src="images/my-image.png" />
+        <div class="col-2 text-center">
+          <img src="images/my-image.png" class="cv-avatar rounded-circle" alt="Portrait photo" width="110" height="110">
         </div>
-        <div class="col col-5 contact">
-            <p><span class="email">@outlook.com</span><i class="fas fa-envelope icon"></i></p>
-            <p>hnimuv<i class="fab fa-linkedin icon"></i></p>
-            <p><span class="homePage">https://minhvu.pro</span><i class="fas fa-globe icon"></i></p>
-            <p><span class="phone">0931 588 458</span><i class="fas fa-mobile-alt icon"></i></p>
-            <p><span class="address">HCM City, Viet Nam</span><i class="fas fa-map-marker-alt icon"></i></p>
+        <div class="col-5">
+          <ul class="list-unstyled cv-contact mb-0 text-end">
+            <li class="d-flex align-items-center justify-content-end gap-2">
+              <span class="email">@outlook.com</span><i class="bi bi-envelope" aria-hidden="true"></i>
+            </li>
+            <li class="d-flex align-items-center justify-content-end gap-2">
+              <span>hnimuv</span><i class="bi bi-linkedin" aria-hidden="true"></i>
+            </li>
+            <li class="d-flex align-items-center justify-content-end gap-2">
+              <span class="homePage">https://minhvu.pro</span><i class="bi bi-globe" aria-hidden="true"></i>
+            </li>
+            <li class="d-flex align-items-center justify-content-end gap-2">
+              <span class="phone">0931 588 458</span><i class="bi bi-telephone" aria-hidden="true"></i>
+            </li>
+            <li class="d-flex align-items-center justify-content-end gap-2">
+              <span class="address">HCM City, Viet Nam</span><i class="bi bi-geo-alt" aria-hidden="true"></i>
+            </li>
+          </ul>
         </div>
-    </div>
+      </div>
+    </header>
     <!-- End Header -->
 
-    <!-- CV Content -->
-    <div id="content" class="row content">
+    <!-- ======= CV Content ======= -->
+    <main class="p-4 pt-0 mt-2">
+      <div class="row g-4">
 
-        <!-- Left Content -->
-        <div class="col col-sm-6">
-            <!-- About Me -->
-            <div class="section-header">About Me</div>
-            <div id="about">
-                <button class="btn btn-outline-primary btn-sm mb-2">Research</button>
-                <button class="btn btn-outline-primary btn-sm mb-2">Time management</button>
-                <button class="btn btn-outline-primary btn-sm mb-2">Initiative</button>
-                <button class="btn btn-outline-primary btn-sm mb-2">Flexibility</button>
-                <button class="btn btn-outline-primary btn-sm mb-2">Problem-Solving</button>
-                <button class="btn btn-outline-primary btn-sm mb-2">Teamwork</button>
-                <button class="btn btn-outline-primary btn-sm mb-2">Work independently</button>
-                <button class="btn btn-outline-primary btn-sm mb-2">Sociable</button>
+        <!-- Left Column -->
+        <div class="col-6">
+
+          <!-- About Me -->
+          <section id="about" class="cv-section">
+            <h2 class="cv-section-title">About Me</h2>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge cv-badge">Research</span>
+              <span class="badge cv-badge">Time management</span>
+              <span class="badge cv-badge">Initiative</span>
+              <span class="badge cv-badge">Flexibility</span>
+              <span class="badge cv-badge">Problem-Solving</span>
+              <span class="badge cv-badge">Teamwork</span>
+              <span class="badge cv-badge">Work independently</span>
+              <span class="badge cv-badge">Sociable</span>
+            </div>
+          </section>
+          <!-- End About Me -->
+
+          <!-- Skills -->
+          <section id="skills" class="cv-section">
+            <h2 class="cv-section-title">Skills</h2>
+
+            <div class="cv-skill-group mb-2">
+              <h3 class="cv-subheading">Development</h3>
+              <ul class="cv-list">
+                <li>C# .NET (Core), VBA, Javascript</li>
+                <li>ASP.NET RazorPage, MVC, Blazor, Web-API(RESTful), jQuery, Bootstrap</li>
+                <li>MSSQL, SQLite, MySQL</li>
+                <li>Database Design, Onion Architecture</li>
+                <li>Pattern: Repository, UnitOfWork, CQRS, DDD</li>
+                <li>Entity Framework (EF Core), MediatR, SignalR, Hangfire, Fluent Validation, AutoMapper, Mapster</li>
+                <li>Deploy ASP .NET on IIS</li>
+                <li>DNS, SSL with wildcard, Cloudflare</li>
+              </ul>
             </div>
 
-            <!-- Skills -->
-            <div class="section-header">Skills</div>
-            <div id="skills">
-                <div class="skill-content">
-                    <div>
-                        <ul class="skill-about">
-                            <li>C# .NET (Core), VBA, Javascript</li>
-                            <li>ASP.NET RazorPage, MVC, Blazor, Web-API(RESTful), jQuery, Bootstrap</li>
-                            <li>MSSQL, SQLite, MySQL</li>
-                            <li>Database Design, Onion Architecture</li>
-                            <li>Pattern: Repository, UnitOfWork, CQRS, DDD</li>
-                            <li>Entity Framework (EF Core), MediatR, SignalR, Hangfire, Fluent Validation, AutoMapper, Mapster</li>
-                            <li>Deploy ASP .NET on IIS</li>
-                            <li>DNS, SSL with wildcard, Cloudflare</li>
-
-                            <li>Microsoft Dynamics NAV 2016 / 2018</li>
-                            <li>LS Retail, LS Data Director</li>
-                            <li>Windows Server 2012, 2016</li>
-                            <li>Jet Reports</li>
-                            <li>POS (barcode scanner, customer display, cash draw, receipt printer, ...)</li>
-                            <li>PDA Datalogic</li>
-
-                            <li>Helpdesk for user about software & hardware</li>
-                            <li>Office devices: PC, printer, scanner, ...</li>
-                            <li>Network devices: router, switch, UniFi system, ...</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="cv-skill-group mb-2">
+              <h3 class="cv-subheading">Retail &amp; ERP Systems</h3>
+              <ul class="cv-list">
+                <li>Microsoft Dynamics NAV 2016 / 2018</li>
+                <li>LS Retail, LS Data Director</li>
+                <li>Windows Server 2012, 2016</li>
+                <li>Jet Reports</li>
+                <li>POS (barcode scanner, customer display, cash draw, receipt printer, ...)</li>
+                <li>PDA Datalogic</li>
+              </ul>
             </div>
 
-            <!-- Education -->
-            <div class="section-header">Education</div>
-            <div id="education">
-
-                <div class="education-content">
-                    <h5 class="education-place">Nhat Nghe - IT Education (2015)</h5>
-                    <p class="education-description">
-                        MCSA 2008 + Messaging + Security
-                    </p>
-                </div>
-
-                <div class="education-content">
-                    <h5 class="education-place">Nguyen Truong To College (2012 - 2015)</h5>
-                    <p class="education-description">
-                        Graduation Certificate: Excellent
-                    </p>
-                </div>
-                
-                <div class="education-content">
-                    <h5 class="education-place">Military Service (2011 - 2012)</h5>
-                    <p class="education-description">
-                        Navy - 4th Regional, Cam Ranh, Khanh Hoa
-                    </p>
-                </div>
-
+            <div class="cv-skill-group">
+              <h3 class="cv-subheading">IT Support</h3>
+              <ul class="cv-list">
+                <li>Helpdesk for user about software &amp; hardware</li>
+                <li>Office devices: PC, printer, scanner, ...</li>
+                <li>Network devices: router, switch, UniFi system, ...</li>
+              </ul>
             </div>
-            <!-- End Education-->
+          </section>
+          <!-- End Skills -->
 
-            <!-- Language -->
-            <div class="section-header">Language</div>
-            <div id="language" class="language">
+          <!-- Education -->
+          <section id="education" class="cv-section">
+            <h2 class="cv-section-title">Education</h2>
 
-                <p>English: average</p>
+            <article class="cv-edu-entry">
+              <h3 class="cv-edu-place">Nhat Nghe - IT Education (2015)</h3>
+              <p class="cv-edu-desc">MCSA 2008 + Messaging + Security</p>
+            </article>
 
-            </div>
-            <!-- End Education-->
+            <article class="cv-edu-entry">
+              <h3 class="cv-edu-place">Nguyen Truong To College (2012 - 2015)</h3>
+              <p class="cv-edu-desc">Graduation Certificate: Excellent</p>
+            </article>
+
+            <article class="cv-edu-entry mb-0">
+              <h3 class="cv-edu-place">Military Service (2011 - 2012)</h3>
+              <p class="cv-edu-desc">Navy - 4th Regional, Cam Ranh, Khanh Hoa</p>
+            </article>
+          </section>
+          <!-- End Education -->
+
+          <!-- Language -->
+          <section id="language" class="cv-section">
+            <h2 class="cv-section-title">Language</h2>
+            <p class="mb-0">English: average</p>
+          </section>
+          <!-- End Language -->
+
         </div>
+        <!-- End Left Column -->
 
-        <!-- Right Content -->
-        <div class="col col-sm-6">
+        <!-- Right Column -->
+        <div class="col-6">
 
-            <!-- Recent Works -->
-            <div class="section-header">Recent Works</div>
-            <div id="works">
+          <!-- Recent Works -->
+          <section id="works" class="cv-section">
+            <h2 class="cv-section-title">Recent Works</h2>
 
-                <div class="work-content">
-	            <div class="work-time">Jan 2024 - Now</div>
-		    <div class="work-position">IT Application Supervisor</div>
-                    <div class="work-time">July 2021 - Now</div>
-                    <div class="work-position">IT Application Specialist</div>
-                    <div class="work-company">Watsons Viet Nam</div>
-                    <ul class="work-description">
-                        <li>Handle requests/incidents/problems and support changes/projects related to Dynamics NAV 2018.</li>
-                        <li>Design database, .NET applications.</li>
-                        <li><b>Technologies:</b> ASP.NET 5 - 6 MVC, WebAPI, EF Core, Blazor, JWT Auth, SignalR, Hangfire...</li>
-                        <li><b>Projects:</b> Internal Management WebApp, Public WebAPI</li>
-                    </ul>
-                </div>
+            <article class="cv-work-entry">
+              <div class="cv-work-time">Jan 2024 - Now</div>
+              <div class="cv-work-position">IT Application Supervisor</div>
+              <div class="cv-work-time">July 2021 - Now</div>
+              <div class="cv-work-position">IT Application Specialist</div>
+              <div class="cv-work-company">Watsons Viet Nam</div>
+              <ul class="cv-list">
+                <li>Handle requests/incidents/problems and support changes/projects related to Dynamics NAV 2018.</li>
+                <li>Design database, .NET applications.</li>
+                <li><b>Technologies:</b> ASP.NET 5 - 6 MVC, WebAPI, EF Core, Blazor, JWT Auth, SignalR, Hangfire...</li>
+                <li><b>Projects:</b> Internal Management WebApp, Public WebAPI</li>
+              </ul>
+            </article>
 
-                <div class="work-content">
-                    <div class="work-time">Feb 2022 - Nov 2022</div>
-                    <div class="work-position">.NET Developer (part-time)</div>
-                    <div class="work-company">ABA Cooltrans</div>
-                    <ul class="work-description">
-                        <li>Design database, .NET Framework developer.</li>
-                        <li><b>Technologies:</b> ASP.NET Framework MVC5, EF6, Javascript, jQuery...</li>
-                        <li><b>Projects:</b> ERP System WebApp</li>
-                    </ul>
-                </div>
+            <article class="cv-work-entry">
+              <div class="cv-work-time">Feb 2022 - Nov 2022</div>
+              <div class="cv-work-position">.NET Developer (part-time)</div>
+              <div class="cv-work-company">ABA Cooltrans</div>
+              <ul class="cv-list">
+                <li>Design database, .NET Framework developer.</li>
+                <li><b>Technologies:</b> ASP.NET Framework MVC5, EF6, Javascript, jQuery...</li>
+                <li><b>Projects:</b> ERP System WebApp</li>
+              </ul>
+            </article>
 
-                <div class="work-content">
-                    <div class="work-time">Nov 2019 - May 2021</div>
-                    <div class="work-position">LS Retail System Executive & .NET Developer</div>
-                    <div class="work-company">BonGrocer Supermarket</div>
-                    <ul class="work-description">
-                        <li>Design database, .NET Core applications & hosting on IIS with DNS + SSL Cloudflare.</li>
-                        <li>Operating Dynamics NAV 2016 Retail system on Server & POS.</li>
-                        <li><b>Technologies:</b> ASP.NET Core MVC, WebAPI, EF Core</li>
-                        <li><b>Projects:</b> Loyalty WebApp, WebAPI</li>
-                    </ul>
-                </div>
+            <article class="cv-work-entry">
+              <div class="cv-work-time">Nov 2019 - May 2021</div>
+              <div class="cv-work-position">LS Retail System Executive &amp; .NET Developer</div>
+              <div class="cv-work-company">BonGrocer Supermarket</div>
+              <ul class="cv-list">
+                <li>Design database, .NET Core applications & hosting on IIS with DNS + SSL Cloudflare.</li>
+                <li>Operating Dynamics NAV 2016 Retail system on Server & POS.</li>
+                <li><b>Technologies:</b> ASP.NET Core MVC, WebAPI, EF Core</li>
+                <li><b>Projects:</b> Loyalty WebApp, WebAPI</li>
+              </ul>
+            </article>
 
-                <div class="work-content">
-                    <div class="work-time">Jun 2018 - May 2021</div>
-                    <div class="work-position">IT Executive</div>
-                    <div class="work-company">C.T Group Viet Nam</div>
-                    <ul class="work-description">
-                        <li>Helpdesk for users (PC software & hardware).</li>
-                        <li>Troubleshoot network devices, office devices.</li>
-                        <li>Support for events of company.</li>
-                    </ul>
-                </div>
+            <article class="cv-work-entry">
+              <div class="cv-work-time">Jun 2018 - May 2021</div>
+              <div class="cv-work-position">IT Executive</div>
+              <div class="cv-work-company">C.T Group Viet Nam</div>
+              <ul class="cv-list">
+                <li>Helpdesk for users (PC software & hardware).</li>
+                <li>Troubleshoot network devices, office devices.</li>
+                <li>Support for events of company.</li>
+              </ul>
+            </article>
 
-                <div class="work-content">
-                    <div class="work-time">Nov 2015 - Feb 2018</div>
-                    <div class="work-position">IT Supervisor</div>
-                    <div class="work-company">Parkson Flemington Shopping Mall</div>
-                    <ul class="work-description">
-                        <li>Monitoring & update data item from Head Office to Store.</li>
-                        <li>Troubleshoot software & hardware for PC, network devices, office devices.</li>
-                        <li>Support store in Promotion days, Warehouse sales, Member days, ...</li>
-                    </ul>
-                </div>
+            <article class="cv-work-entry mb-0">
+              <div class="cv-work-time">Nov 2015 - Feb 2018</div>
+              <div class="cv-work-position">IT Supervisor</div>
+              <div class="cv-work-company">Parkson Flemington Shopping Mall</div>
+              <ul class="cv-list">
+                <li>Monitoring & update data item from Head Office to Store.</li>
+                <li>Troubleshoot software & hardware for PC, network devices, office devices.</li>
+                <li>Support store in Promotion days, Warehouse sales, Member days, ...</li>
+              </ul>
+            </article>
 
-            </div>
-            <!-- End Recent Works -->
+          </section>
+          <!-- End Recent Works -->
 
-            
         </div>
+        <!-- End Right Column -->
 
-    </div>
+      </div>
+    </main>
+    <!-- End CV Content -->
 
-    <!-- JS File -->
-	<script src="../assets/vendor/jquery/jquery.min.js"></script>
-    <script src="lib/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
-    <script src="../assets/js/data.js"></script>
-    
-	<script>
-	$(document).ready(function () {
-		//window.print();
-	});
-	</script>
+  </div>
+
+  <!-- JS File -->
+  <script src="../assets/js/data.js"></script>
+  <script>
+    (function () {
+      var PX_PER_MM = 96 / 25.4;
+      var A4_HEIGHT_PX = 297 * PX_PER_MM;
+
+      function fitToOnePage() {
+        var page = document.querySelector('.cv-page');
+        if (!page) return;
+
+        page.style.transform = '';
+        page.style.width = '';
+
+        var contentHeight = page.scrollHeight;
+        if (contentHeight > A4_HEIGHT_PX) {
+          var scale = A4_HEIGHT_PX / contentHeight;
+          page.style.transformOrigin = 'top left';
+          page.style.transform = 'scale(' + scale + ')';
+          page.style.width = (100 / scale) + '%';
+        }
+      }
+
+      function resetFit() {
+        var page = document.querySelector('.cv-page');
+        if (!page) return;
+        page.style.transform = '';
+        page.style.width = '';
+      }
+
+      window.addEventListener('beforeprint', fitToOnePage);
+      window.addEventListener('afterprint', resetFit);
+    })();
+  </script>
 </body>
 
 </html>
